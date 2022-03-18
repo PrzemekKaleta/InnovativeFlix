@@ -61,7 +61,7 @@ public with sharing class EpisodeTriggerHandler {
                     if(temMapSeasonsEpisodesToSave.containsKey(ep.Season__c)){
 
                         if(temMapSeasonsEpisodesToSave.get(ep.Season__c).contains(ep.Episod_Number__c.intValue())){
-                            listToSave.add(ep);
+                            listNotToSave.add(ep);
                         }else{
                             temMapSeasonsEpisodesToSave.get(ep.Season__c).add(ep.Episod_Number__c.intValue());
                         }
