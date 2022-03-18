@@ -53,35 +53,33 @@ public with sharing class EpisodeTriggerHandler {
             }
 
             }
-            for(Episode__c ep : listNotToSave){
-                ep.addError('For this Season that number of Episode already exist');
-            }
+
 
             //TODO - check inside listToSave is there any collision.
 
-            List<Episode__c> finalListToSave = new List<Episode__c>();
+            Map<Id, List<Integer>>temMapSeasonsEpisodesToSave = new Map<Id, List<Integer>>();
+            
+            if(!listToSave.isEmpty()){
+                for(Episode__c ep : listToSave){
 
-            for(Episode__c ep : listToSave){
+                    if(temMapSeasonsEpisodesToSave.containsKey(ep.Season__c)){
 
-                if(finalListToSave.con)
-
+                        if(temMapSeasonsEpisodesToSave.get(ep.Season__c).contains(ep.Episod_Number__c.intValue())){
+                            listToSave.add(ep);
+                        }else{
+                            temMapSeasonsEpisodesToSave.get(ep.Season__c).add(ep.Episod_Number__c.intValue());
+                        }
+                    }else{
+                        List<Integer> numbersEpisod = new List<Integer>();
+                        numbersEpisod.add(ep.Episod_Number__c.intValue());
+                        temMapSeasonsEpisodesToSave.put(ep.Season__c,numbersEpisod);
+                    }
+                }
             }
 
-            // Map<Id, List<Integer>>mapSeasonsEpisodesToSave = new Map<Id, List<Integer>>();
-            
-            // if(!listNotToSave.isEmpty()){
-            //     for(Episode__c ep : listNotToSave){
-
-            //         if(mapSeasonsEpisodesToSave.containsKey(ep.Season__c)){
-
-            //             mapSeasonsEpisodesToSave.get(ep.Season__c).add(ep.Episod_Number__c.intValue());
-            //         }else{
-            //             List<Integer> numbersEpisod = new List<Integer>();
-            //             numbersEpisod.add(ep.Episod_Number__c.intValue());
-            //             mapSeasonsEpisodesToSave.put(ep.Season__c,numbersEpisod);
-            //         }
-            //     }
-            // }
+            for(Episode__c ep : listNotToSave){
+                ep.addError('For this Season that number of Episode already exist, or you add at least two Episodes with the same number.');
+            }
 
 
     }
