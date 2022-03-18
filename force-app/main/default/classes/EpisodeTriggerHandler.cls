@@ -31,8 +31,7 @@ public with sharing class EpisodeTriggerHandler {
                 }
             }
 
-            //prepare lists to save/unsave and go thru the episodes from Trigger if they (season and nuber episode) are in map
-            
+            //prepare lists to save/unsave and go thru the episodes from Trigger if they (season and nuber episode) are in map         
             List<Episode__c>listToSave = new List<Episode__c>();
             List<Episode__c>listNotToSave = new List<Episode__c>();
 
@@ -50,13 +49,10 @@ public with sharing class EpisodeTriggerHandler {
                     }              
                 }else{
                     listToSave.add(ep);         
+                }
             }
 
-            }
-
-
-            //TODO - check inside listToSave is there any collision.
-
+            //check inside listToSave is there any collision.
             Map<Id, List<Integer>>temMapSeasonsEpisodesToSave = new Map<Id, List<Integer>>();
             
             if(!listToSave.isEmpty()){
