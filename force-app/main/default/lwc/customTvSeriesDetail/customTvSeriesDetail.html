@@ -1,6 +1,4 @@
 <template>
-    <div>Hello World Component</div>
-    <div>{recordId}</div>
     <template for:each={seasons.data} for:item="season">
         <c-season-detail key={season.Id} season={season}></c-season-detail>
     </template>

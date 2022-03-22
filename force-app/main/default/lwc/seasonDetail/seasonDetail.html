@@ -1,0 +1,10 @@
+<template>
+    <lightning-card>
+        <p class="slds-p-horizontal_small">Season {season.Season_Number__c}</p>
+        <div if:true={openListEpisodes}>
+            <template for:each={episodes.data} for:item="episode">
+                <c-episode-detail key={episode.Id} episode={episode}></c-episode-detail>
+            </template>
+        </div>
+    </lightning-card>
+</template>
