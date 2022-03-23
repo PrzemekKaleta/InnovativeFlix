@@ -7,14 +7,16 @@ export default class SeasonDetail extends LightningElement {
     @wire(getEpisodesBySeason,{seasonId: '$season.Id'})
     episodes;
 
-    //TODO change to false after adding a click event
-    openListEpisodes = true;
+    openListEpisodes = false;
+
 
     clickme(){
         if(this.openListEpisodes){
             this.openListEpisodes = false;
+
         }else{
             this.openListEpisodes = true;
+
         }
     }
 

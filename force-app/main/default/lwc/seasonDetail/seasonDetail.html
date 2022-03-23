@@ -1,10 +1,14 @@
 <template>
-    <lightning-card>
-        <p class="slds-p-horizontal_small">Season {season.Season_Number__c}</p>
-        <div if:true={openListEpisodes}>
-            <template for:each={episodes.data} for:item="episode">
-                <c-episode-detail key={episode.Id} episode={episode}></c-episode-detail>
-            </template>
-        </div>
-    </lightning-card>
+    <div style="margin:15px">
+        <h1>Season {season.Season_Number__c}</h1>
+        <lightning-card>
+            <lightning-button if:false={openListEpisodes} variant="success" label="Show Episodes" title="ShowHide List" onclick={clickme} class="slds-m-left_x-small"></lightning-button>
+            <lightning-button if:true={openListEpisodes} variant="destructive" label="Hide Episodes" title="ShowHide List" onclick={clickme} class="slds-m-left_x-small"></lightning-button>
+            <div if:true={openListEpisodes}>
+                <template for:each={episodes.data} for:item="episode">
+                    <c-episode-detail key={episode.Id} episode={episode}></c-episode-detail>
+                </template>
+            </div>
+        </lightning-card>
+    </div>
 </template>
