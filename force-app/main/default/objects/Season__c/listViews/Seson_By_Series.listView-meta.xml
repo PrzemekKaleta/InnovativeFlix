@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Seson_By_Series</fullName>
+    <columns>Season_Number__c</columns>
+    <columns>Tv_Serie__c</columns>
+    <filterScope>Mine</filterScope>
+    <label>Seson By Series</label>
+</ListView>
