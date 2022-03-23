@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Trailer_Number_Validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(Trailer_Number__c &lt; 1,Trailer_Number__c &gt;1000)</errorConditionFormula>
+    <errorMessage>Trailer number should be between 1 and 1000.</errorMessage>
+</ValidationRule>
