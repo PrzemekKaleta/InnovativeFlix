@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <apiVersion>54.0</apiVersion>
+    <decisions>
+        <name>Name_Is_Exist</name>
+        <label>Name Is Exist</label>
+        <locationX>154</locationX>
+        <locationY>361</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Is_Exist</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Tv_Serie_All.Name</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Back_To_Begining_Screen</targetReference>
+            </connector>
+            <label>Yes Is Exist</label>
+        </rules>
+        <rules>
+            <name>No_Is_not_Exist</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Tv_Serie_All.Name</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_TvSerie</targetReference>
+            </connector>
+            <label>No Is not Exist</label>
+        </rules>
+    </decisions>
+    <dynamicChoiceSets>
+        <name>Type_Tv_Serie</name>
+        <dataType>Multipicklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Type__c</picklistField>
+        <picklistObject>Tv_Serie__c</picklistObject>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>TypesMulitselect</name>
+        <dataType>Multipicklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Type__c</picklistField>
+        <picklistObject>Tv_Serie__c</picklistObject>
+    </dynamicChoiceSets>
+    <interviewLabel>Create New TvSerie {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Create New TvSerie</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordCreates>
+        <name>Create_TvSerie</name>
+        <label>Create TvSerie</label>
+        <locationX>351</locationX>
+        <locationY>433</locationY>
+        <connector>
+            <targetReference>Record_Created</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Display_Faults</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>Description__c</field>
+            <value>
+                <elementReference>Description</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Logo_URL__c</field>
+            <value>
+                <elementReference>Logo_URL.value</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <elementReference>Tv_Serie_Name</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Type__c</field>
+            <value>
+                <elementReference>Type</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Tv_Serie__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <name>Tv_Serie_All</name>
+        <label>Tv Serie All</label>
+        <locationX>301</locationX>
+        <locationY>255</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Name_Is_Exist</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Tv_Serie_Name</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Tv_Serie__c</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Name</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <screens>
+        <name>Back_To_Begining_Screen</name>
+        <label>Back To Begining Screen</label>
+        <locationX>163</locationX>
+        <locationY>126</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>New_Tv_Serie</targetReference>
+        </connector>
+        <fields>
+            <name>Back_To_Begining</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;This name for &lt;/span&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;Tv Serie&lt;/b&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;: &lt;/span&gt;&lt;b style=&quot;font-size: 16px; color: rgb(0, 74, 250);&quot;&gt;{!Tv_Serie_Name}&lt;/b&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt; is already &lt;/span&gt;&lt;span style=&quot;font-size: 16px; color: rgb(255, 0, 0);&quot;&gt;exist&lt;/span&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Display_Faults</name>
+        <label>Display Faults</label>
+        <locationX>546</locationX>
+        <locationY>433</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Display_Fault_Message</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;color: rgb(250, 0, 0);&quot;&gt;{!$Flow.FaultMessage}&lt;/span&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;&lt;span class=&quot;ql-cursor&quot;&gt;﻿&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>Please add all needed information to add Tv Serie</description>
+        <name>New_Tv_Serie</name>
+        <label>New Tv Serie</label>
+        <locationX>461</locationX>
+        <locationY>187</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Tv_Serie_All</targetReference>
+        </connector>
+        <fields>
+            <name>Tv_Serie_Name</name>
+            <dataType>String</dataType>
+            <fieldText>Tv Serie Name</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <validationRule>
+                <errorMessage>&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;The name is not valid, it should contain at least 2 characters (special characters are not allowed).&lt;/span&gt;&lt;/p&gt;</errorMessage>
+                <formulaExpression>OR((REGEX({!Tv_Serie_Name},&quot;[a-zA-Z_0-9]\\s[a-zA-Z_0-9][a-zA-Z_0-9\\s]*&quot;)),
+(REGEX({!Tv_Serie_Name},&quot;[a-zA-Z_0-9]{2,}[a-zA-Z_0-9\\s]*&quot;)))</formulaExpression>
+            </validationRule>
+        </fields>
+        <fields>
+            <name>Logo_URL</name>
+            <extensionName>flowruntime:url</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>URL for Logo Tv Series</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
+            <name>Type</name>
+            <choiceReferences>TypesMulitselect</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Type</fieldText>
+            <fieldType>MultiSelectPicklist</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>Description</name>
+            <fieldText>Description</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Record_Created</name>
+        <label>Record Created</label>
+        <locationX>353</locationX>
+        <locationY>587</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>RecordCreated</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;Your &lt;/span&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;Tv Serie&lt;/b&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt; named:  &lt;/span&gt;&lt;b style=&quot;font-size: 16px; color: rgb(0, 0, 255);&quot;&gt;{!Tv_Serie_Name}&lt;/b&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt; has been created &lt;/span&gt;&lt;span style=&quot;font-size: 16px; color: rgb(0, 255, 0);&quot;&gt;successfully&lt;/span&gt;&lt;span style=&quot;font-size: 16px;&quot;&gt;.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>510</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>New_Tv_Serie</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+</Flow>
