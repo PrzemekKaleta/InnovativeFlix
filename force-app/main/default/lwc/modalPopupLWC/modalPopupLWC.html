@@ -1,17 +1,13 @@
 <template>
-    <!-- lightning button for open modal window -->
     <lightning-button variant="brand"
        label="Add Episod"
        title="Add Episod"
        onclick={openModal}
        class="slds-m-left_x-small">
     </lightning-button>
-    <!--Use template if:true to display/hide popup based on isModalOpen value--> 
     <template if:true={isModalOpen}>
-        <!-- Modal/Popup Box LWC starts here -->
         <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
             <div class="slds-modal__container">
-                <!-- Modal/Popup Box LWC header here -->
                 <header class="slds-modal__header">
                     <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
                         <lightning-icon icon-name="utility:close"
@@ -20,21 +16,14 @@
                             size="small" ></lightning-icon>
                         <span class="slds-assistive-text">Close</span>
                     </button>
-                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Modal/PopUp Box header LWC</h2>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Add Episode(s) to Season <strong>{season.Season_Number__c}</strong> of <strong>{tvSerieName}</strong> Tv Serie.</h2>
                 </header>
-                <!-- Modal/Popup Box LWC body starts here -->
                 <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
-                    <p><b>Modals/Popup Box are used to display content in a layer above the app.
-                    </b></p>
-                    <p><b>This paradigm is used in cases such as the creation or editing of a record, as well as various types of messaging and wizards.
-                    </b></p>
-                    <!-- ADD new lwc element - form to add episode -->
+                    <p><b>After create Episode you can create next episod or close this popup</b></p>
                     <c-episode-creator season={season}></c-episode-creator>
                 </div>
-                <!-- Modal/Popup Box LWC footer starts here -->
                 <footer class="slds-modal__footer">
-                    <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
-                    <button class="slds-button slds-button_brand" onclick={submitDetails} title="OK">OK</button>
+                    <button class="slds-button slds-button_brand" onclick={closeModal} title="Close">Close</button>
                 </footer>
             </div>
         </section>

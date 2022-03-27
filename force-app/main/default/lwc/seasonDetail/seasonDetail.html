@@ -2,12 +2,17 @@
     <div style="margin:15px">
         <h1>Season {season.Season_Number__c}</h1>
         <lightning-card>
-            <lightning-button if:false={openListEpisodes} variant="success" label="Show Episodes" title="ShowHide List" onclick={clickme} class="slds-m-left_x-small"></lightning-button>
-            <lightning-button if:true={openListEpisodes} variant="destructive" label="Hide Episodes" title="ShowHide List" onclick={clickme} class="slds-m-left_x-small"></lightning-button>
-            <c-modal-popup-l-w-c season={season}></c-modal-popup-l-w-c>
+            <template if:true={emptyEpisodes}>
+                <lightning-button if:false={openListEpisodes} variant="success" label="Show Episodes" title="ShowHide List" disabled class="slds-m-left_x-small"></lightning-button>
+            </template>
+            <template if:false={emptyEpisodes}>
+                <lightning-button if:false={openListEpisodes} variant="success" label="Show Episodes" title="ShowHide List" onclick={clickme} class="slds-m-left_x-small"></lightning-button>
+                <lightning-button if:true={openListEpisodes} variant="destructive" label="Hide Episodes" title="ShowHide List" onclick={clickme} class="slds-m-left_x-small"></lightning-button>
+            </template>
+            <c-modal-popup-l-w-c season={season} tv-serie-name={name}></c-modal-popup-l-w-c>
             <div if:true={openListEpisodes}>
                 <template for:each={episodes.data} for:item="episode">
-                    <c-episode-detail key={episode.Id} episode={episode}></c-episode-detail>
+                    <c-episode-detail key={episode.Id} episode={episode} ></c-episode-detail>
                 </template>
             </div>
         </lightning-card>
