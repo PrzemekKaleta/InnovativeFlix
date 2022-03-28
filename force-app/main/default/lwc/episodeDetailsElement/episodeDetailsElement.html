@@ -1,0 +1,14 @@
+<template>
+    <template if:true={episode}>
+        <lightning-card  title={episode.Episod_Number__c}>
+            <p class="slds-p-horizontal_small">{episode.Description__c}</p>
+            <p slot="footer">Created: {createdDate}</p>
+        </lightning-card>      
+    </template>
+    <template if:false={episode}>
+        <lightning-card  title="Choose a Episode to see details">
+            <p class="slds-p-horizontal_small">Description: ...</p>
+            <p slot="footer">Created: ... </p>
+        </lightning-card>      
+    </template>
+</template>

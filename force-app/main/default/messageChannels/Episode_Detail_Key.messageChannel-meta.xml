@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>EpisodeDetailKey</masterLabel>
+    <isExposed>true</isExposed>
+    <description>Message Channel to pass episod Id to see details</description>
+     <lightningMessageFields>
+        <fieldName>operator</fieldName>
+        <description>This is the operator type of the manipulation</description>
+    </lightningMessageFields>
+         <lightningMessageFields>
+        <fieldName>episodeid</fieldName>
+        <description>This is the Id episode to shown details</description>
+    </lightningMessageFields>
+</LightningMessageChannel>
