@@ -30,9 +30,6 @@ public with sharing class EpisodeTrigger_Test {
 
         Season__c season1 = TestDataFactory.createSeason(tvSerie1.Id, 1);
         insert season1;
-
-        // Episode__c episode1 = TestDataFactory.createEpisode(season1.Id,1); 
-        // insert episode1;
         
         Tv_Serie__c tvSerie2 = TestDataFactory.createTvSerie('Test Tv Serie 2');
         insert tvSerie2;
@@ -44,13 +41,7 @@ public with sharing class EpisodeTrigger_Test {
         episodesList.add(TestDataFactory.createEpisode(season1.Id,1));
         episodesList.add(TestDataFactory.createEpisode(season2.Id,1));
         episodesList.add(TestDataFactory.createEpisode(season2.Id,2));
-        
-        // Episode__c episode2 = TestDataFactory.createEpisode(season2.Id,1);
-        // insert episode2;
-
-        // Episode__c episode3 = TestDataFactory.createEpisode(season2.Id,2);
-        // insert episode3;
-
+    
         insert episodesList;
         
         Episode__c episode4 = TestDataFactory.createEpisode(season2.Id,3);
