@@ -3,16 +3,17 @@ public with sharing class EpisodeTriggerHandler {
     public static void checkEpisodeValidation(List<Episode__c>episodesToCheck){
         
             //new List Id to prepare for Query - get all Id of Seasons that could collide.
-            List<Id>seasonsUsed = new List<Id>();
+            Set<Id>seasonsUsedSet = new Set<Id>();
 
             for(Episode__c epi : episodesToCheck){
+                seasonsUsedSet.add(epi.Season__c);
+            }
+            
+            List<Episode__c>existsEpisodes = new List<Episode__c>();
 
-                if(!seasonsUsed.contains(epi.Season__c)){
-                    seasonsUsed.add(epi.Season__c);
-                }
-            }        
-
-            List<Episode__c>existsEpisodes = [SELECT Id, Season__c,Episod_Number__c FROM Episode__c WHERE Season__c IN:seasonsUsed];
+            if(!seasonsUsedSet.isEmpty()){
+                existsEpisodes = [SELECT Id, Season__c,Episod_Number__c FROM Episode__c WHERE Season__c IN:seasonsUsedSet];
+            }
 
             //prepare from exist episodes that can collide where key is Season and value are nuber of episodes
             Map<Id, List<Integer>>mapSeasonsEpisodes = new Map<Id, List<Integer>>();
@@ -31,24 +32,27 @@ public with sharing class EpisodeTriggerHandler {
                 }
             }
 
-            //prepare lists to save/unsave and go thru the episodes from Trigger if they (season and nuber episode) are in map         
+            //prepare lists to save/unsave and go thru the episodes from Trigger if they (season and number episode) are in map         
             List<Episode__c>listToSave = new List<Episode__c>();
             List<Episode__c>listNotToSave = new List<Episode__c>();
 
-            for(Episode__c ep : episodesToCheck){
+            if(mapSeasonsEpisodes.isEmpty()){
+                listToSave.addAll(episodesToCheck);
+                
+            }else{
 
-               Id seasonId = ep.Season__c;
-               Integer episodeNumber = ep.Episod_Number__c.intValue();
+                for(Episode__c ep : episodesToCheck){
 
-               if(mapSeasonsEpisodes.containsKey(seasonId)){
-                   List<Integer>listToCheck = mapSeasonsEpisodes.get(seasonId);
-                   if(!listToCheck.contains(episodeNumber)){
-                        listToSave.add(ep);
+                    if(mapSeasonsEpisodes.containsKey(ep.Season__c)){
+                        List<Integer>listToCheck = mapSeasonsEpisodes.get(ep.Season__c);
+                    if(!listToCheck.contains(ep.Episod_Number__c.intValue())){
+                            listToSave.add(ep);
+                        }else{
+                            listNotToSave.add(ep);
+                        }              
                     }else{
-                        listNotToSave.add(ep);
-                    }              
-                }else{
-                    listToSave.add(ep);         
+                        listToSave.add(ep);         
+                    }
                 }
             }
 

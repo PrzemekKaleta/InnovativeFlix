@@ -4,7 +4,7 @@ public with sharing class EpisodeTrigger_Test {
     @isTest
     static void addEpisodtoEmptyDB(){
 
-        Tv_Serie__c tvSerie = TestDataFactory.createTvSerie();
+        Tv_Serie__c tvSerie = TestDataFactory.createTvSerie('Test Tv Serie');
         insert tvSerie;
 
         Season__c season = TestDataFactory.createSeason(tvSerie.Id, 1);
@@ -25,26 +25,33 @@ public with sharing class EpisodeTrigger_Test {
     @isTest
     static void addEpisodetoNotEmptyDB(){
 
-        Tv_Serie__c tvSerie1 = TestDataFactory.createTvSerie();
+        Tv_Serie__c tvSerie1 = TestDataFactory.createTvSerie('Test Tv Serie');
         insert tvSerie1;
 
         Season__c season1 = TestDataFactory.createSeason(tvSerie1.Id, 1);
         insert season1;
 
-        Episode__c episode1 = TestDataFactory.createEpisode(season1.Id,1); 
-        insert episode1;
+        // Episode__c episode1 = TestDataFactory.createEpisode(season1.Id,1); 
+        // insert episode1;
         
-        Tv_Serie__c tvSerie2 = TestDataFactory.createTvSerie2();
+        Tv_Serie__c tvSerie2 = TestDataFactory.createTvSerie('Test Tv Serie 2');
         insert tvSerie2;
 
-        Season__c season2 = TestDataFactory.createSeason(tvSerie2.Id, 1);
+        Season__c season2 = TestDataFactory.createSeason(tvSerie2.Id,1);
         insert season2;
 
-        Episode__c episode2 = TestDataFactory.createEpisode(season2.Id,1);
-        insert episode2;
+        List<Episode__c>episodesList = new List<Episode__c>();
+        episodesList.add(TestDataFactory.createEpisode(season1.Id,1));
+        episodesList.add(TestDataFactory.createEpisode(season2.Id,1));
+        episodesList.add(TestDataFactory.createEpisode(season2.Id,2));
+        
+        // Episode__c episode2 = TestDataFactory.createEpisode(season2.Id,1);
+        // insert episode2;
 
-        Episode__c episode3 = TestDataFactory.createEpisode(season2.Id,2);
-        insert episode3;
+        // Episode__c episode3 = TestDataFactory.createEpisode(season2.Id,2);
+        // insert episode3;
+
+        insert episodesList;
         
         Episode__c episode4 = TestDataFactory.createEpisode(season2.Id,3);
         
@@ -61,7 +68,7 @@ public with sharing class EpisodeTrigger_Test {
     @isTest
     static void addEpisodethatExist(){
 
-        Tv_Serie__c tvSerie = TestDataFactory.createTvSerie();
+        Tv_Serie__c tvSerie = TestDataFactory.createTvSerie('Test Tv Serie');
         insert tvSerie;
 
         Season__c season = TestDataFactory.createSeason(tvSerie.Id, 1);
@@ -92,7 +99,7 @@ public with sharing class EpisodeTrigger_Test {
     @isTest
     static void addDuplicatedEpisodes(){
 
-        Tv_Serie__c tvSerie = TestDataFactory.createTvSerie();
+        Tv_Serie__c tvSerie = TestDataFactory.createTvSerie('Test Tv Serie');
         insert tvSerie;
 
         Season__c season = TestDataFactory.createSeason(tvSerie.Id, 1);
@@ -120,7 +127,7 @@ public with sharing class EpisodeTrigger_Test {
     @isTest
     static void addListEpisodes(){
 
-        Tv_Serie__c tvSerie = TestDataFactory.createTvSerie();
+        Tv_Serie__c tvSerie = TestDataFactory.createTvSerie('Test Tv Serie');
         insert tvSerie;
 
         Season__c season = TestDataFactory.createSeason(tvSerie.Id, 1);

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Thriller</fullName>
+        <default>false</default>
+        <label>Thriller</label>
+    </customValue>
+    <customValue>
+        <fullName>Sci-Fi</fullName>
+        <default>false</default>
+        <label>Sci-Fi</label>
+    </customValue>
+    <customValue>
+        <fullName>Fantasy</fullName>
+        <default>false</default>
+        <label>Fantasy</label>
+    </customValue>
+    <customValue>
+        <fullName>Anime</fullName>
+        <default>false</default>
+        <label>Anime</label>
+    </customValue>
+    <customValue>
+        <fullName>Romance</fullName>
+        <default>false</default>
+        <label>Romance</label>
+    </customValue>
+    <customValue>
+        <fullName>Adventure</fullName>
+        <default>false</default>
+        <label>Adventure</label>
+    </customValue>
+    <customValue>
+        <fullName>Melodrama</fullName>
+        <default>false</default>
+        <label>Melodrama</label>
+    </customValue>
+    <customValue>
+        <fullName>Crime</fullName>
+        <default>false</default>
+        <label>Crime</label>
+    </customValue>
+    <customValue>
+        <fullName>Romantic comedy</fullName>
+        <default>false</default>
+        <label>Romantic comedy</label>
+    </customValue>
+    <customValue>
+        <fullName>Comedy</fullName>
+        <default>false</default>
+        <label>Comedy</label>
+    </customValue>
+    <customValue>
+        <fullName>Drama</fullName>
+        <default>false</default>
+        <label>Drama</label>
+    </customValue>
+    <customValue>
+        <fullName>Documentary</fullName>
+        <default>false</default>
+        <label>Documentary</label>
+    </customValue>
+    <customValue>
+        <fullName>Animation</fullName>
+        <default>false</default>
+        <label>Animation</label>
+    </customValue>
+    <customValue>
+        <fullName>Action</fullName>
+        <default>false</default>
+        <label>Action</label>
+    </customValue>
+    <description>Typical Film and Series Types</description>
+    <masterLabel>Movie Types</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

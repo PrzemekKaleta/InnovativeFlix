@@ -2,7 +2,7 @@
 <ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Season_Number_Validation</fullName>
     <active>true</active>
-    <description>For the same Tv Serie numbers of seasons should be uniqe</description>
+    <description>For one Tv Serie is limit for no more than 1000 seasons.</description>
     <errorConditionFormula>OR(Season_Number__c &lt; 1,
 					Season_Number__c &gt;1000)</errorConditionFormula>
     <errorDisplayField>Season_Number__c</errorDisplayField>

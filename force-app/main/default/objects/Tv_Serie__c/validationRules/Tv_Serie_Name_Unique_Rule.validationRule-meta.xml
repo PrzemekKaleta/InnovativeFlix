@@ -3,9 +3,10 @@
     <fullName>Tv_Serie_Name_Unique_Rule</fullName>
     <active>true</active>
     <description>Tv Serie must be unique</description>
-    <errorConditionFormula>LEN(VLOOKUP($ObjectType.Tv_Serie__c.Fields.Name,
-								$ObjectType.Tv_Serie__c.Fields.Name,
-								Name))&gt;0</errorConditionFormula>
+    <errorConditionFormula>AND(CONTAINS(VLOOKUP( 
+        $ObjectType.Tv_Serie__c.Fields.Name , 
+        $ObjectType.Tv_Serie__c.Fields.Name, Name),Name), 
+        OR(ISNEW(),ISCHANGED(Name)))</errorConditionFormula>
     <errorDisplayField>Name</errorDisplayField>
-    <errorMessage>Tv Serie of this Name already exist.</errorMessage>
+    <errorMessage>Tv Serie of this Name already exists.</errorMessage>
 </ValidationRule>

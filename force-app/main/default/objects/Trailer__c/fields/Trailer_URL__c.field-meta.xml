@@ -3,7 +3,7 @@
     <fullName>Trailer_URL__c</fullName>
     <externalId>false</externalId>
     <label>Trailer URL</label>
-    <required>false</required>
+    <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Url</type>
 </CustomField>
